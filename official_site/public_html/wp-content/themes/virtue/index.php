@@ -20,8 +20,8 @@
 <?php endwhile; ?>
 
 <?php if ($wp_query->max_num_pages > 1) : ?>
-        <?php if(function_exists('wp_pagenavi')) { ?>
-              <?php wp_pagenavi(); ?>   
+        <?php if(function_exists('kad_wp_pagenavi')) { ?>
+              <?php kad_wp_pagenavi(); ?>   
             <?php } else { ?>      
               <nav class="post-nav">
                 <ul class="pager">

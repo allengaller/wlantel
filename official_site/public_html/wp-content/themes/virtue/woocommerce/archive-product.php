@@ -45,13 +45,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	  		
 			<?php woocommerce_product_loop_start(); ?>
 
-				<?php woocommerce_product_subcategories(); ?>
+				<div class="clearfix product_category_padding"> <?php woocommerce_product_subcategories(); ?> </div>
+				<div id="product_masonry">
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
 				<?php endwhile; // end of the loop. ?>
+				</div>
 
 			<?php woocommerce_product_loop_end(); ?>
 

@@ -25,7 +25,7 @@
     <?php endif; ?>
 
     <?php if (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')) : ?>
-    <?php global $smof_data; if(isset($smof_data['close_comments'])) {$show_closed_comment = $smof_data['close_comments']; } else {$show_closed_comment = 1;}
+    <?php global $virtue; if(isset($virtue['close_comments'])) {$show_closed_comment = $virtue['close_comments']; } else {$show_closed_comment = 1;}
     if($show_closed_comment == 1){ ?>
     <div class="alert">
       <?php _e('Comments are closed.', 'virtue'); ?>
@@ -36,7 +36,7 @@
   <?php endif; ?>
 
 <?php if (!have_comments() && !comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')) : ?>
-  <?php global $smof_data; if(isset($smof_data['close_comments'])) {$show_closed_comment = $smof_data['close_comments']; } else {$show_closed_comment = 1;}
+  <?php global $virtue; if(isset($virtue['close_comments'])) {$show_closed_comment = $virtue['close_comments']; } else {$show_closed_comment = 1;}
     if($show_closed_comment == 1){ ?>
   <section id="comments">
     <div class="alert">

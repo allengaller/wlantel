@@ -2,6 +2,10 @@
 /**
  * Custom functions
  */
+function virtue_img_placeholder() {
+  return get_template_directory_uri() . '/assets/img/placement.png';
+}
+
 function detect_mobile()
 {
     if(preg_match('/(alcatel|amoi|android|avantgo|blackberry|benq|cell|cricket|docomo|elaine|htc|iemobile|iphone|ipad|ipaq|ipod|j2me|java|midp|mini|mmp|mobi|motorola|nec-|nokia|palm|panasonic|philips|phone|playbook|sagem|sharp|sie-|silk|smartphone|sony|symbian|t-mobile|telus|up\.browser|up\.link|vodafone|wap|webos|wireless|xda|xoom|zte)/i', $_SERVER['HTTP_USER_AGENT']))
@@ -28,7 +32,7 @@ function hex2rgb($hex) {
 }
 
 ///Page Navigation
-	function wp_pagenavi() {
+	function kad_wp_pagenavi() {
   global $wp_query, $wp_rewrite;
   $pages = '';
   $max = $wp_query->max_num_pages;

@@ -4,12 +4,14 @@
  */
 function virtue_sidebar_list() {
   $all_sidebars=array(array('name'=>__('Primary Sidebar', 'virtue'), 'id'=>'sidebar-primary'));
-  global $smof_data; 
-  if(isset($smof_data['c_sidebars'])) {
-  if (is_array($smof_data['c_sidebars'])) {
-  foreach($smof_data['c_sidebars'] as $sidebar){
-    if(empty($sidebar['title'])) $sidebar['title'] = 'sidebar'.$sidebar['order'];
-    $all_sidebars[]=array('name'=>$sidebar['title'], 'id'=>'sidebar'.$sidebar['order']);
+  global $virtue; 
+  if(isset($virtue['cust_sidebars'])) {
+  if (is_array($virtue['cust_sidebars'])) {
+    $i = 1;
+  foreach($virtue['cust_sidebars'] as $sidebar){
+    if(empty($sidebar)) {$sidebar = 'sidebar'.$i;}
+    $all_sidebars[]=array('name'=>$sidebar, 'id'=>'sidebar'.$i);
+    $i++;
   }
  }
 }
@@ -62,7 +64,7 @@ function kadence_widgets_init() {
     'after_title'   => '</h3>',
   ));
   // Footer
-  global $smof_data; if(isset($smof_data['footer_layout'])) { $footer_layout = $smof_data['footer_layout'];} else {$footer_layout = "twoc";}
+  global $virtue; if(isset($virtue['footer_layout'])) { $footer_layout = $virtue['footer_layout'];} else {$footer_layout = "twoc";}
   if ($footer_layout == "fourc") {
     if ( function_exists('register_sidebar') )
       register_sidebar(array(
@@ -349,9 +351,12 @@ class Kadence_Social_Widget extends WP_Widget {
     if (!isset($instance['instagram'])) { $instance['instagram'] = ''; }
     if (!isset($instance['googleplus'])) { $instance['googleplus'] = ''; }
     if (!isset($instance['flickr'])) { $instance['flickr'] = ''; }
+    if (!isset($instance['vimeo'])) { $instance['vimeo'] = ''; }
     if (!isset($instance['youtube'])) { $instance['youtube'] = ''; }
     if (!isset($instance['pinterest'])) { $instance['pinterest'] = ''; }
     if (!isset($instance['dribbble'])) { $instance['dribbble'] = ''; }
+    if (!isset($instance['linkedin'])) { $instance['linkedin'] = ''; }
+    if (!isset($instance['rss'])) { $instance['rss'] = ''; }
 
     echo $before_widget;
     if ($title) {
@@ -367,9 +372,12 @@ class Kadence_Social_Widget extends WP_Widget {
 <?php if(!empty($instance['instagram'])):?><a href="<?php echo esc_url($instance['instagram']); ?>" class="instagram_link" title="Instagram" target="_blank" rel="tooltip" data-placement="top" data-original-title="Instagram"><i class="icon-instagram"></i></a><?php endif;?>
 <?php if(!empty($instance['googleplus'])):?><a href="<?php echo esc_url($instance['googleplus']); ?>" class="googleplus_link" title="GooglePlus" target="_blank" rel="tooltip" data-placement="top" data-original-title="GooglePlus"><i class="icon-google-plus"></i></a><?php endif;?>
 <?php if(!empty($instance['flickr'])):?><a href="<?php echo esc_url($instance['flickr']); ?>" class="flickr_link" title="Flickr" rel="tooltip" target="_blank" data-placement="top" data-original-title="Flickr"><i class="icon-flickr"></i></a><?php endif;?>
+<?php if(!empty($instance['vimeo'])):?><a href="<?php echo esc_url($instance['vimeo']); ?>" class="vimeo_link" title="Vimeo" target="_blank" rel="tooltip" data-placement="top" data-original-title="Vimeo"><i class="icon-play"></i></a><?php endif;?>
 <?php if(!empty($instance['youtube'])):?><a href="<?php echo esc_url($instance['youtube']); ?>" class="youtube_link" title="YouTube" target="_blank" rel="tooltip" data-placement="top" data-original-title="YouTube"><i class="icon-youtube"></i></a><?php endif;?>
 <?php if(!empty($instance['pinterest'])):?><a href="<?php echo esc_url($instance['pinterest']); ?>" class="pinterest_link" title="Pinterest" target="_blank" rel="tooltip" data-placement="top" data-original-title="Pinterest"><i class="icon-pinterest"></i></a><?php endif;?>
 <?php if(!empty($instance['dribbble'])):?><a href="<?php echo esc_url($instance['dribbble']); ?>" class="dribbble_link" title="Dribbble" target="_blank" rel="tooltip" data-placement="top" data-original-title="Dribbble"><i class="icon-dribbble"></i></a><?php endif;?>
+<?php if(!empty($instance['linkedin'])):?><a href="<?php echo esc_url($instance['linkedin']); ?>" class="linkedin_link" title="LinkedIn" target="_blank" rel="tooltip" data-placement="top" data-original-title="LinkedIn"><i class="icon-linkedin"></i></a><?php endif;?>
+<?php if(!empty($instance['rss'])):?><a href="<?php echo esc_url($instance['rss']); ?>" class="rss_link" title="RSS" target="_blank" rel="tooltip" data-placement="top" data-original-title="RSS"><i class="icon-rss-sign"></i></a><?php endif;?>
     </div>
   <?php
     echo $after_widget;
@@ -386,9 +394,12 @@ class Kadence_Social_Widget extends WP_Widget {
     $instance['instagram'] = strip_tags($new_instance['instagram']);
     $instance['googleplus'] = strip_tags($new_instance['googleplus']);
     $instance['flickr'] = strip_tags($new_instance['flickr']);
+    $instance['vimeo'] = strip_tags($new_instance['vimeo']);
     $instance['youtube'] = strip_tags($new_instance['youtube']);
     $instance['pinterest'] = strip_tags($new_instance['pinterest']);
     $instance['dribbble'] = strip_tags($new_instance['dribbble']);
+    $instance['linkedin'] = strip_tags($new_instance['linkedin']);
+    $instance['rss'] = strip_tags($new_instance['rss']);
     $this->flush_widget_cache();
 
     $alloptions = wp_cache_get('alloptions', 'options');
@@ -410,9 +421,12 @@ class Kadence_Social_Widget extends WP_Widget {
     $instagram = isset($instance['instagram']) ? esc_attr($instance['instagram']) : '';
     $googleplus = isset($instance['googleplus']) ? esc_attr($instance['googleplus']) : '';
     $flickr = isset($instance['flickr']) ? esc_attr($instance['flickr']) : '';
+    $vimeo = isset($instance['vimeo']) ? esc_attr($instance['vimeo']) : '';
     $youtube = isset($instance['youtube']) ? esc_attr($instance['youtube']) : '';
     $pinterest = isset($instance['pinterest']) ? esc_attr($instance['pinterest']) : '';
     $dribbble = isset($instance['dribbble']) ? esc_attr($instance['dribbble']) : '';
+    $linkedin = isset($instance['linkedin']) ? esc_attr($instance['linkedin']) : '';
+    $rss = isset($instance['rss']) ? esc_attr($instance['rss']) : '';
   ?>
   <p>
       <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title:', 'virtue'); ?></label>
@@ -439,6 +453,10 @@ class Kadence_Social_Widget extends WP_Widget {
       <input class="widefat" id="<?php echo esc_attr($this->get_field_id('flickr')); ?>" name="<?php echo esc_attr($this->get_field_name('flickr')); ?>" type="text" value="<?php echo esc_attr($flickr); ?>" />
     </p>
     <p>
+      <label for="<?php echo esc_attr($this->get_field_id('vimeo')); ?>"><?php _e('Vimeo:', 'virtue'); ?></label>
+      <input class="widefat" id="<?php echo esc_attr($this->get_field_id('vimeo')); ?>" name="<?php echo esc_attr($this->get_field_name('vimeo')); ?>" type="text" value="<?php echo esc_attr($vimeo); ?>" />
+    </p>
+    <p>
       <label for="<?php echo esc_attr($this->get_field_id('youtube')); ?>"><?php _e('Youtube:', 'virtue'); ?></label>
       <input class="widefat" id="<?php echo esc_attr($this->get_field_id('youtube')); ?>" name="<?php echo esc_attr($this->get_field_name('youtube')); ?>" type="text" value="<?php echo esc_attr($youtube); ?>" />
     </p>
@@ -449,6 +467,14 @@ class Kadence_Social_Widget extends WP_Widget {
     <p>
       <label for="<?php echo esc_attr($this->get_field_id('dribbble')); ?>"><?php _e('Dribbble:', 'virtue'); ?></label>
       <input class="widefat" id="<?php echo esc_attr($this->get_field_id('dribbble')); ?>" name="<?php echo esc_attr($this->get_field_name('dribbble')); ?>" type="text" value="<?php echo esc_attr($dribbble); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo esc_attr($this->get_field_id('linkedin')); ?>"><?php _e('Linkedin:', 'virtue'); ?></label>
+      <input class="widefat" id="<?php echo esc_attr($this->get_field_id('linkedin')); ?>" name="<?php echo esc_attr($this->get_field_name('linkedin')); ?>" type="text" value="<?php echo esc_attr($linkedin); ?>" />
+    </p>
+    <p>
+      <label for="<?php echo esc_attr($this->get_field_id('rss')); ?>"><?php _e('RSS:', 'virtue'); ?></label>
+      <input class="widefat" id="<?php echo esc_attr($this->get_field_id('rss')); ?>" name="<?php echo esc_attr($this->get_field_name('rss')); ?>" type="text" value="<?php echo esc_attr($rss); ?>" />
     </p>
   <?php
   }
@@ -541,8 +567,8 @@ class Kadence_Recent_Posts_Widget extends WP_Widget {
   function form( $instance ) {
     $title = isset($instance['title']) ? esc_attr($instance['title']) : '';
     $number = isset($instance['number']) ? absint($instance['number']) : 5;
-    if (isset($instance['thecate'])) { $thecate = esc_attr($instance['thecate']); }
-     $categories= get_categories();
+     if (isset($instance['thecate'])) { $thecate = esc_attr($instance['thecate']); } else {$thecate = '';}
+          $categories= get_categories();
      $cate_options = array();
           $cate_options[] = '<option value="">All</option>';
  

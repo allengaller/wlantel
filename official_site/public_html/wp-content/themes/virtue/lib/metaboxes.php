@@ -114,17 +114,28 @@ function virtue_metaboxes( array $meta_boxes ) {
 				'type' => 'text_small',
 			),
 			array(
-				'name'    => __("Post Summery", 'virtue' ),
+				'name'    => __("Post Summary", 'virtue' ),
 				'desc'    => '',
 				'id'      => $prefix . 'post_summery',
 				'type'    => 'select',
 				'options' => array(
+					array( 'name' => __('Default', 'virtue' ), 'value' => 'default', ),
 					array( 'name' => __('Text', 'virtue' ), 'value' => 'text', ),
 					array( 'name' => __('Portrait Image', 'virtue'), 'value' => 'img_portrait', ),
 					array( 'name' => __('Landscape Image', 'virtue'), 'value' => 'img_landscape', ),
 					array( 'name' => __('Portrait Image Slider', 'virtue'), 'value' => 'slider_portrait', ),
 					array( 'name' => __('Landscape Image Slider', 'virtue'), 'value' => 'slider_landscape', ),
 					array( 'name' => __('Video', 'virtue'), 'value' => 'video', ),
+				),
+			),
+			array(
+				'name' => __('Display Sidebar?', 'virtue'),
+				'desc' => __('Choose if layout is fullwidth or sidebar', 'virtue'),
+				'id'   => $prefix . 'post_sidebar',
+				'type'    => 'select',
+				'options' => array(
+					array( 'name' => __('Yes', 'virtue'), 'value' => 'yes', ),
+					array( 'name' => __('No', 'virtue'), 'value' => 'no', ),
 				),
 			),
 			array(
@@ -190,13 +201,14 @@ $meta_boxes[] = array(
 				'fields' => array(
 			
 			array(
-				'name'    => 'Project Layout',
-				'desc'    => '',
+				'name'    => __('Project Layout', 'virtue'),
+				'desc'    => '<a href="#" rel="lightbox" target="_new" >Whats the difference?</a>',
 				'id'      => $prefix . 'ppost_layout',
 				'type'    => 'radio_inline',
 				'options' => array(
 					array( 'name' => __('Beside', 'virtue'), 'value' => 'beside', ),
-					array( 'name' => __('Above', 'virtue'), 'value' => 'above', ), 
+					array( 'name' => __('Above', 'virtue'), 'value' => 'above', ),
+					array( 'name' => __('Three Rows', 'virtue'), 'value' => 'three', ), 
 				),
 			),
 			array(
@@ -211,9 +223,15 @@ $meta_boxes[] = array(
 				),
 			),
 			array(
-				'name' => __('Image and Slider Height', 'virtue'),
-				'desc' => __('Default is: 450 <b>(Note: just input number, example: 450)</b>', 'virtue'),
+				'name' => __("Max Image/Slider Height", 'virtue' ),
+				'desc' => __("Default is: 450 <b>(Note: just input number, example: 350)</b>", 'virtue' ),
 				'id'   => $prefix . 'posthead_height',
+				'type' => 'text_small',
+			),
+			array(
+				'name' => __("Max Image/Slider Width", 'virtue' ),
+				'desc' => __("Default is: 670 or 1170 on <b>above</b> or <b>three row</b> layouts (Note: just input number, example: 650)</b>", 'virtue' ),
+				'id'   => $prefix . 'posthead_width',
 				'type' => 'text_small',
 			),
 			array(
@@ -329,6 +347,18 @@ $meta_boxes[] = array(
                 'type' => 'imag_select_taxonomy',
                 'taxonomy' => 'portfolio-type',
             ),
+            array(
+				'name'    => __('Order Items By', 'virtue'),
+				'desc'    => '',
+				'id'      => $prefix . 'portfolio_order',
+				'type'    => 'select',
+				'options' => array(
+					array( 'name' => __('Menu Order', 'virtue'), 'value' => 'menu_order', ),
+					array( 'name' => __('Title', 'virtue'), 'value' => 'title', ),
+					array( 'name' => __('Date', 'virtue'), 'value' => 'date', ),
+					array( 'name' => __('Random', 'virtue'), 'value' => 'rand', ),
+				),
+			),
 			array(
 				'name'    => __('Items per Page', 'virtue'),
 				'desc'    => __('How many portfolio items per page', 'virtue'),
@@ -408,7 +438,18 @@ $meta_boxes[] = array(
 				'desc' => __("Default is: 1170 <b>(Note: just input number, example: 650, does not apply to Carousel slider)</b>", 'virtue' ),
 				'id'   => $prefix . 'posthead_width',
 				'type' => 'text_small',
-			),			array(
+			),
+			array(
+				'name'    => __('Use Lightbox for Feature Image', 'virtue'),
+				'desc'    => __("If feature option is set to image, choose to use lightbox link with image.", 'virtue' ),
+				'id'      => $prefix . 'feature_img_lightbox',
+				'type'    => 'select',
+				'options' => array(
+					array( 'name' => __('Yes', 'virtue'), 'value' => 'yes', ),
+					array( 'name' => __('No', 'virtue'), 'value' => 'no', ),
+				),
+			),
+			array(
 				'name' => __('If Video Post', 'virtue'),
 				'desc' => __('Place Embed Code Here, works with youtube, vimeo...', 'virtue'),
 				'id'   => $prefix . 'post_video',
@@ -463,10 +504,26 @@ $meta_boxes[] = array(
 				'id'      => $prefix . 'blog_summery',
 				'type'    => 'select',
 				'options' => array(
-					array( 'name' => __('Summery', 'virtue'), 'value' => 'summery', ),
+					array( 'name' => __('Summary', 'virtue'), 'value' => 'summery', ),
 					array( 'name' => __('Full', 'virtue'), 'value' => 'full', ),
 				),
 			),
+			array(
+				'name' => __('Display Sidebar?', 'virtue'),
+				'desc' => __('Choose if layout is fullwidth or sidebar', 'virtue'),
+				'id'   => $prefix . 'page_sidebar',
+				'type'    => 'select',
+				'options' => array(
+					array( 'name' => __('Yes', 'virtue'), 'value' => 'yes', ),
+					array( 'name' => __('No', 'virtue'), 'value' => 'no', ),
+				),
+			),
+			array(
+				'name'    => __('Choose Sidebar', 'virtue'),
+				'desc'    => '',
+				'id'      => $prefix . 'sidebar_choice',
+				'type'    => 'imag_select_sidebars',
+				),
 				
 			));
 			$meta_boxes[] = array(
@@ -565,7 +622,7 @@ $meta_boxes[] = array(
 				'id'         => 'page_sidebar',
 				'title'      => __('Sidebar Options', 'virtue'),
 				'pages'      => array( 'page' ), // Post type
-				'show_on' => array( 'key' => 'page-template', 'value' => array('page-sidebar.php','page-feature-sidebar.php', 'page-blog.php')),
+				'show_on' => array( 'key' => 'page-template', 'value' => array('page-sidebar.php','page-feature-sidebar.php')),
 				'context'    => 'normal',
 				'priority'   => 'high',
 				'show_names' => true, // Show field names on the left

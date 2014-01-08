@@ -17,7 +17,8 @@ Template Name: Feature
 				else if ($headoption == 'video') {
 					?>
 					 <section class="postfeat container">
-				          <div class="videofit">
+					 	<?php global $post; $swidth = get_post_meta( $post->ID, '_kad_posthead_width', true ); if (!empty($swidth)) $slidewidth = $swidth; else $slidewidth = 1170; ?>
+				          <div class="videofit" style="max-width:<?php echo $slidewidth;?>px; margin-left: auto; margin-right:auto;">
 				              <?php global $post; $video = get_post_meta( $post->ID, '_kad_post_video', true ); echo $video; ?>
 				          </div>
 				        </section>
@@ -25,13 +26,18 @@ Template Name: Feature
 				}
 				else if ($headoption == 'image') {
                 global $post; $height = get_post_meta( $post->ID, '_kad_posthead_height', true ); if (!empty($height)) $slideheight = $height; else $slideheight = 400; 
-                          $swidth = get_post_meta( $post->ID, '_kad_posthead_width', true ); if (!empty($swidth)) $slidewidth = $swidth; else $slidewidth = 1170;             
+                          $swidth = get_post_meta( $post->ID, '_kad_posthead_width', true ); if (!empty($swidth)) $slidewidth = $swidth; else $slidewidth = 1170;   
+                          $uselightbox = get_post_meta( $post->ID, '_kad_feature_img_lightbox', true ); if (!empty($uselightbox)) $lightbox = $uselightbox; else $lightbox = 'yes';             
                     $thumb = get_post_thumbnail_id();
                     $img_url = wp_get_attachment_url( $thumb,'full' ); 
                     $image = aq_resize( $img_url, $slidewidth, $slideheight, true ); //resize & crop the image
                     ?>
                     <?php if($image == "") { $image = $img_url; } ?>
-                      <div class="container"><div class="imghoverclass img-margin-center"><a href="<?php echo $img_url ?>" rel="lightbox[pp_gal]" class="lightboxhover"><img src="<?php echo $image ?>" alt="<?php the_title(); ?>" /></a></div></div>
+                      <div class="container"><div class="imghoverclass img-margin-center">
+                      	<?php if($lightbox == 'yes') {?><a href="<?php echo $img_url ?>" rel="lightbox" class="lightboxhover"><?php } ?>
+                      		<img src="<?php echo $image ?>" alt="<?php the_title(); ?>" />
+                      	<?php if($lightbox == 'yes') {?></a><?php } ?>
+                      </div></div>
                     <?php
 				}
 		?>

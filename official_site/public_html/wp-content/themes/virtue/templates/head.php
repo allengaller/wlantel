@@ -5,11 +5,10 @@
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <?php global $smof_data; ?>
+  <?php global $virtue; ?>
   <title><?php wp_title( '|', true, 'right' ); ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="<?php echo bloginfo('description'); ?>" />
-  <link rel="shortcut icon" type="image/x-icon" href="<?php if (isset($smof_data['custom_favicon'])) { echo $smof_data['custom_favicon']; } ?>" />
+  <link rel="shortcut icon" type="image/x-icon" href="<?php if (isset($virtue['virtue_custom_favicon']['url'])) { echo $virtue['virtue_custom_favicon']['url']; } ?>" />
   <?php $blog_virtue = get_template_directory_uri();?>
   <script type="text/javascript">
   	var virtue_URL = "<?php echo $blog_virtue ?>";

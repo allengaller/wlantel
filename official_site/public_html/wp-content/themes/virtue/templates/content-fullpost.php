@@ -7,23 +7,30 @@
                <section class="postfeat">
                 <div class="flexslider" style="max-width:<?php echo $slidewidth;?>px;">
                 <ul class="slides">
-                  <?php $args = array(
-                      'order'          => 'ASC',
-                      'post_type'      => 'attachment',
-                      'post_parent'    => $post->ID,
-                      'post_mime_type' => 'image',
-                      'post_status'    => null,
-                      'orderby'    => 'menu_order',
-                      'numberposts'    => -1,);
-                    $attachments = get_posts($args);
-                if ($attachments) {
-                foreach ($attachments as $attachment) {
-                  $attachment_url = wp_get_attachment_url($attachment->ID , 'full');
-                  $image = aq_resize($attachment_url, $swidth, $slideheight, true);
-                   if(empty($image)) { $image = $attachment_url; } 
-                  echo '<li><img src="'.$image.'"/></li>';
-                } 
-              } ?>                            
+                   <?php global $post;
+                      $image_gallery = get_post_meta( $post->ID, '_kad_image_gallery', true );
+                          if(!empty($image_gallery)) {
+                            $attachments = array_filter( explode( ',', $image_gallery ) );
+                              if ($attachments) {
+                              foreach ($attachments as $attachment) {
+                                $attachment_url = wp_get_attachment_url($attachment , 'full');
+                                $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
+                                  if(empty($image)) {$image = $attachment_url;}
+                                echo '<li><img src="'.$image.'"/></li>';
+                              }
+                            }
+                          } else {
+                            $attach_args = array('order'=> 'ASC','post_type'=> 'attachment','post_parent'=> $post->ID,'post_mime_type' => 'image','post_status'=> null,'orderby'=> 'menu_order','numberposts'=> -1);
+                            $attachments = get_posts($attach_args);
+                              if ($attachments) {
+                                foreach ($attachments as $attachment) {
+                                  $attachment_url = wp_get_attachment_url($attachment->ID , 'full');
+                                  $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
+                                    if(empty($image)) {$image = $attachment_url;}
+                                  echo '<li><img src="'.$image.'"/></li>';
+                                }
+                              } 
+                          } ?>                             
             </ul>
           </div> <!--Flex Slides-->
           <script type="text/javascript">
@@ -68,9 +75,9 @@
       <a href="<?php the_permalink() ?>"><h1 class="entry-title"><?php the_title(); ?></h1></a>
       <div class="subhead">
                                   <span class="postauthortop">
-                                    <i class="icon-user"></i> by <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author"><?php echo get_the_author() ?></a>
+                                    <i class="icon-user"></i> <?php echo __('by', 'virtue');?> <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author"><?php echo get_the_author() ?></a> |
                                   </span>
-                                  <?php $post_category = get_the_category($post->ID); if ( $post_category==true ) { ?> | <span class="postedintop"><i class="icon-folder-open"></i> <?php _e('posted in:', 'virtue'); ?> <?php the_category(', ') ?></span> <?php }?>
+                                  <?php $post_category = get_the_category($post->ID); if ( $post_category==true ) { ?>  <span class="postedintop"><i class="icon-folder-open"></i> <?php _e('posted in:', 'virtue'); ?> <?php the_category(', ') ?></span> <?php }?>
                                   |
                                 <span class="postcommentscount">
                                   <i class="icon-comments-alt"></i> <?php comments_number( '0', '1', '%' ); ?>

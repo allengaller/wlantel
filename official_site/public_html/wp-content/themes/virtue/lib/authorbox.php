@@ -68,7 +68,7 @@ function virtue_author_box() { ?>
             $args = array( 'numberposts' => '3' );
             $recent_posts = wp_get_recent_posts( $args );
             foreach( $recent_posts as $post ){
-			echo '<li><a href="' . get_permalink($post["ID"]) . '" title="'.$post["post_title"].'" ><i class="icon-caret-right"></i>' .   $post["post_title"].'</a><span class="recentpost-date"> - '. get_the_time('F j, Y', $post["ID"]) .'</span> </li> ';
+			echo '<li><a href="' . get_permalink($post["ID"]) . '" title="'.$post["post_title"].'" ><i class="icon-caret-right"></i>  ' .   $post["post_title"].'</a><span class="recentpost-date"> - '. get_the_time('F j, Y', $post["ID"]) .'</span> </li> ';
 			} ?>
 			</ul>
 	</div><!--Latest Post -->

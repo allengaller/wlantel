@@ -14,7 +14,10 @@ Template Name: Portfolio Grid
       <div class="main <?php echo kadence_main_class(); ?>" role="main">
 			<?php get_template_part('templates/content', 'page'); ?>
       	<?php global $post; $portfolio_category = get_post_meta( $post->ID, '_kad_portfolio_type', true ); 
-			   				   $portfolio_items = get_post_meta( $post->ID, '_kad_portfolio_items', true ); 
+			   				   $portfolio_items = get_post_meta( $post->ID, '_kad_portfolio_items', true );
+			   				   $portfolio_order = get_post_meta( $post->ID, '_kad_portfolio_order', true ); 
+			   				   	if(isset($portfolio_order)) {$p_orderby = $portfolio_order;} else {$p_orderby = 'menu_order';}
+			   				   	if($p_orderby == 'menu_order') {$p_order = 'ASC';} else {$p_order = 'DESC';}
 			   				   if($portfolio_category == '-1' || empty($portfolio_category)) { $portfolio_cat_slug = ''; $portfolio_cat_ID = ''; } else {
 								 $portfolio_cat = get_term_by ('id',$portfolio_category,'portfolio-type' );
 							$portfolio_cat_slug = $portfolio_cat -> slug;
@@ -38,8 +41,8 @@ Template Name: Portfolio Grid
 				  $wp_query = new WP_Query();
 				  $wp_query->query(array(
 					'paged' => $paged,
-					'orderby' => 'menu_order',
-					'order' => 'ASC',
+					'orderby' => $p_orderby,
+					'order' => $p_order,
 					'post_type' => 'portfolio',
 					'portfolio-type'=>$portfolio_cat_slug,
 					'posts_per_page' => $portfolio_items));
@@ -98,8 +101,8 @@ Template Name: Portfolio Grid
                 </div> <!--portfoliowrapper-->
                                     
                     <?php if ($wp_query->max_num_pages > 1) : ?>
-                            <?php if(function_exists('wp_pagenavi')) { ?>
-                            <?php wp_pagenavi(); ?>   
+                            <?php if(function_exists('kad_wp_pagenavi')) { ?>
+                            <?php kad_wp_pagenavi(); ?>   
                             <?php } else { ?>      
                             <nav id="post-nav" class="pager">
                                 <div class="previous"><?php next_posts_link(__('&larr; Older posts', 'virtue')); ?></div>

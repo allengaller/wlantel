@@ -1,12 +1,10 @@
 <?php
-$wp_include = "../wp-load.php";
-$i = 0;
-while (!file_exists($wp_include) && $i++ < 10) {
-  $wp_include = "../$wp_include";
-}
-
 // let's load WordPress
-require($wp_include);
+$absolute_path = __FILE__;
+$path_to_file = explode( 'wp-content', $absolute_path );
+$path_to_wp = $path_to_file[0];
+
+require_once( $path_to_wp . '/wp-load.php' );
 
 if ( !is_user_logged_in() || !current_user_can('edit_posts') ) 
 	wp_die(__("You are not allowed to be here", 'virtue'));

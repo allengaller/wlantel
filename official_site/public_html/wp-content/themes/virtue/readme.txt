@@ -22,30 +22,163 @@ Virtue Theme Uses:
 * FontAwesome by Dave Gandy (http://fontawesome.io) licensed under the SIL OFL 1.1 (http://scripts.sil.org/OFL)
 * FlexSlider by WooThemes under the GPLv2 license (http://www.gnu.org/licenses/gpl-2.0.html)
 * Star Font and Woocommerce Templates by Woothemes for Woocommerce (licensed under GNU General Public License v2.0 or later)
-* RootsTheme (http://www.rootstheme.com/) licensed under MIT license, http://www.opensource.org/licenses/mit-license.php
-* SMOF - Slightly Modded Options Framework (https://github.com/syamilmj/Options-Framework) licensed under GNU General Public License v2.0 or later
+* Theme aspects derived from RootsTheme (http://www.rootstheme.com/) licensed under MIT license, http://www.opensource.org/licenses/mit-license.php
+* Redux Options Framework (http://reduxframework.com/) licensed under GNU General Public License v3.0
 * Google Fonts (available through Google web Fonts: http://www.google.com/fonts/), licensed under Apache License Version 2
 * Aqua Resizer (https://github.com/syamilmj/Aqua-Resizer), licensed under WTFPL http://www.wtfpl.net/
 * Twitter Bootstrap (https://github.com/twbs/bootstrap), licensed under Apache License Version 2
 * Custom Metaboxes and Fields for Wordpress (https://github.com/jaredatch/Custom-Metaboxes-and-Fields-for-WordPress), licensed under GNU General Public License v2.0 or later
-* Lightbox2 (https://github.com/lokesh/lightbox2) Licensed under the Creative Commons Attribution 2.5 License
+* Magnific Popup (http://dimsemenov.com/plugins/magnific-popup/) licensed under MIT license, http://www.opensource.org/licenses/mit-license.php
 * carouFredSel (https://github.com/gilbitron/carouFredSel), licensed under GNU General Public License v2.0 or later 
 * Select2 (http://ivaynberg.github.io/select2/), licensed under GNU General Public License v2.0 or later
 * hoverIntent (https://github.com/briancherne/jquery-hoverIntent), licensed under MIT license, http://www.opensource.org/licenses/mit-license.php
 * Superfish (https://github.com/joeldbirch/superfish) Dual licensed under the MIT and GPL licenses: http://www.opensource.org/licenses/mit-license.php, http://www.gnu.org/licenses/gpl.html
-* retina.js (https://github.com/imulus/retinajs) licensed under MIT license, http://www.opensource.org/licenses/mit-license.php
 * Fitvids (https://github.com/davatron5000/FitVids.js/blob/master/jquery.fitvids.js), Released under the WTFPL license - http://sam.zoy.org/wtfpl/
 * touchSwipe, (https://github.com/mattbryson/TouchSwipe-Jquery-Plugin), Dual licensed under the MIT or GPL Version 2 licenses
 * jquery.customSelect (http://adam.co/lab/jquery/customselect/), Dual licensed under the MIT or GPL Version 2 licenses
-* jQuery gMap (http://github.com/marioestrada/jQuery-gMap), licensed under Creative Commons BY-SA 3.0 
+* GMAP3 Plugin for JQuery (http://gmap3.net/), licensed under GNU General Public License v3.0
 * jQuery Scroll to Top Control script (http://www.dynamicdrive.com/) Custom license: http://www.dynamicdrive.com/notice.htm
+* Masonry (http://masonry.desandro.com/) licensed under MIT license, http://www.opensource.org/licenses/mit-license.php
 * TGM Plugin Activation library (https://github.com/thomasgriffin/TGM-Plugin-Activation) licensed under GNU General Public License v2.0 or later
+* jQuery Validation ( http://bassistance.de/jquery-plugins/jquery-plugin-validation/), Dual licensed under the MIT or GPL Version 2 licenses
 
 -------------------------------------------------------
     Changelog:
 -------------------------------------------------------
 
 = Theme Name: Virtue =
+
+= Version: 1.8.5 =
+* Fix Latest Post Slider
+* Add Ajax cart
+* Fix Portfolio Img Alt
+* Add Portfolio Comments
+* Fix Portfolio Carousel with Sidebar
+
+= Version: 1.8.4 =
+* Updated Screenshot for wordpress 3.8
+* Updated tag for wordpress 3.8
+
+= Version: 1.8.3 =
+* Add options to order portfolio items on the home page.
+* Add options to order portfolio items on the portfolio gird page.
+* Update google fonts
+* Add video size option
+
+= Version: 1.8.2 =
+* Fix issue with video
+* Fix issue with custom css
+* Fix issue with contact forum
+* Remove the activation script to transfer options.
+
+= Version: 1.8.0 =
+* Add import old options support
+* Fix issue with mobile slider
+* Fix issue with portfolio type not working on home layout
+* Add option for more portfolio items in carousel
+* Add default setting for metaboxes
+
+= Version: 1.7.8 =
+* Add text domain for "by"
+* Fix for Subversion
+* Fix theme options server error
+* Fix issue with gallery not working
+* Fix issue with rating showing on 
+* Fix Issue with themeoptions freezing
+
+
+= Version: 1.7.7 =
+* Fixed Issue with frontpage.php
+* Removed tracking file and System Info file
+* Removed Google Font Check
+
+= Version: 1.7.6 =
+* Fixed Issue with home page blog categories
+* Fixed Issue with the home page portfolio categories.
+
+= Version: 1.7.5 =
+* Updated Skins CSS
+* New Theme Options panel
+* Update Old Theme Options on activation
+* New Theme Options for products 
+* Fix Masonry issue with products
+* Remove Retina.js from theme
+* Add description to icon menu
+* Add latest post slider option
+* Add option to change layout for topbar
+
+= Version: 1.5.6 =
+* Added opt in for retina.js
+* Updated Mobile slider
+* Updated language issue for topbar widget
+* Updated AquaResizer
+* Updated styling with theme options
+* Add Category Page Subtitle
+* Add to options: turning off Virtue Gallery
+* Update Menu CSS
+* Update Feature Template with lightbox options
+* Update flexslider, carousel css for IE 8
+* Added Masonry.js
+* Updated products to use masonry.js
+* Changed Lightbox to Magnific Popup, droped prettyPhoto.
+* Added footer column css class
+
+= Version: 1.5.5 =
+* Change how custom css gets called
+* Updated portfolio grid issue
+* Change styling with theme options
+* Add js override to make varations in woocommerce work
+* Add styling to prettyPhoto
+* Fix icon menu issue
+* Updated Social Widget
+* Update language for translation 
+* Fix issue with footer translation
+* Fix issue with icons disappearing in theme options when translated
+* Changes class for products
+
+= Version: 1.5.4 =
+
+* Updated Links in Theme Options
+* Changed Theme Lightbox to prettyPhoto
+* Change gMap to GMAP3 Plugin for JQuery
+
+= Version: 1.5.3 =
+
+* Updated Menu Walker
+* Added portfolio Tax update
+* Fixed issue with admin icons disapearing when theme is translated.
+* Updated Screen shot
+
+= Version: 1.5.2 =
+
+* Added option for full blog on home page
+* Added new Mobile Menu
+* Added mobile menu background options
+* Updated how google fonts called for https
+* Updated how google maps api called for https
+* Option to Hide Post Author
+
+= Version: 1.5.1 =
+
+* Added Support for showing subcategories in Woocommerce.
+* Fixed Issue with title color not working correctly.
+* Fixed Issue with home blog tooltip
+
+
+= Version: 1.5.0 =
+
+* Fixed Issue with topbar icon links not working
+* Fixed Issue with subtitle box being too large
+* Fixed Issue with Site Tagline Syling
+* Changed how categories show on Home page posts
+* Update Skins
+* Fixed Issue with Product variations on sale
+* Add Portfolio image size options
+* Add gallery metabox
+* Add third Layout for Portfolio
+* Added fullwidth blog posts
+* Added fullwidth blog pages
+* Added Wordpress Gallery sizes 5, 6 and 7
 
 = Version: 1.4.2 =
 

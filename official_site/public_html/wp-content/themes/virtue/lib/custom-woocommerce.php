@@ -29,9 +29,9 @@ woocommerce_related_products(4,4); // Display 4 products in rows of 4
 add_filter('loop_shop_per_page', 'wooframework_products_per_page');
 if (!function_exists('wooframework_products_per_page')) {
   function wooframework_products_per_page() {
-    global $smof_data;
-    if ( isset( $smof_data['products_per_page'] ) ) {
-      return $smof_data['products_per_page'];
+    global $virtue;
+    if ( isset( $virtue['products_per_page'] ) ) {
+      return $virtue['products_per_page'];
     }
   }
 }
@@ -40,8 +40,8 @@ if (!function_exists('wooframework_products_per_page')) {
 add_action('wp_head','wooframework_tab_check');
 if ( ! function_exists( 'wooframework_tab_check' ) ) {
   function wooframework_tab_check() {
-    global $smof_data;
-    if ( isset( $smof_data[ 'product_tabs' ] ) && $smof_data[ 'product_tabs' ] == "0" ) {
+    global $virtue;
+    if ( isset( $virtue[ 'product_tabs' ] ) && $virtue[ 'product_tabs' ] == "0" ) {
       remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
     }
   }
@@ -51,8 +51,8 @@ if ( ! function_exists( 'wooframework_tab_check' ) ) {
 add_action('wp_head','wooframework_related_products');
 if ( ! function_exists( 'wooframework_related_products' ) ) {
   function wooframework_related_products() {
-    global $smof_data;
-    if ( isset( $smof_data[ 'related_products' ] ) && $smof_data[ 'related_products' ] == "0" ) {
+    global $virtue;
+    if ( isset( $virtue[ 'related_products' ] ) && $virtue[ 'related_products' ] == "0" ) {
       remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
     }
   }
@@ -64,10 +64,23 @@ function woocommerce_category_image() {
       $cat = $wp_query->get_queried_object();
       $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
       $image = wp_get_attachment_url( $thumbnail_id );
-      global $smof_data; if( isset( $smof_data[ 'shop_layout' ] ) && $smof_data[ 'shop_layout' ] == "sidebar" ) {$cat_width = 770;} else {$cat_width = 1170;}
+      global $virtue; if( isset( $virtue[ 'shop_layout' ] ) && $virtue[ 'shop_layout' ] == "sidebar" ) {$cat_width = 770;} else {$cat_width = 1170;}
       $sizeimage = aq_resize($image, $cat_width, 300, true);
       if ( $image ) {
         echo '<div class="cat_main_img"><img src="' . $sizeimage . '" alt="" /></div>';
     }
   }
+}
+add_filter('add_to_cart_fragments', 'kad_woocommerce_header_add_to_cart_fragment');
+function kad_woocommerce_header_add_to_cart_fragment( $fragments ) {
+    global $woocommerce;
+     $carttext = __('Your Cart', 'virtue');
+    ob_start(); ?>
+
+    <a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'virtue'); ?>">
+        <i class="icon-basket" style="padding-right:5px;"></i> <?php echo $carttext; ?> - <?php echo $woocommerce->cart->get_cart_total(); ?>
+    </a>
+    <?php
+    $fragments['a.cart-contents'] = ob_get_clean();
+    return $fragments;
 }

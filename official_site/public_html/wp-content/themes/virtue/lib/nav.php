@@ -76,20 +76,7 @@ class kadence_Nav_Walker extends Walker_Nav_Menu {
 
 /**
  * Remove the id="" on nav menu items
- * Return 'menu-slug' for nav menu classes
  */
-function kadence_nav_menu_css_class($classes, $item) {
-  $slug = sanitize_title($item->title);
-  $classes = preg_replace('/(current(-menu-|[-_]page[-_])(item|parent|ancestor))/', 'active', $classes);
-  $classes = preg_replace('/^((menu|page)[-_\w+]+)+/', '', $classes);
-
-  $classes[] = 'menu-' . $slug;
-
-  $classes = array_unique($classes);
-
-  return array_filter($classes, 'is_element_empty');
-}
-add_filter('nav_menu_css_class', 'kadence_nav_menu_css_class', 10, 2);
 add_filter('nav_menu_item_id', '__return_null');
 
 /**
@@ -115,33 +102,3 @@ function kadence_nav_menu_args($args = '') {
 }
 add_filter('wp_nav_menu_args', 'kadence_nav_menu_args');
 
-
-
-
-// Mobile Menu Output
-
-class Virtue_Dropdown_Nav extends Walker_Nav_Menu {
-
-  function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-    global $wp_query;
-    $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-    $indent_sub  = "";
-    if($depth != 0)
-           {
-               $indent_sub = "&ndash;&nbsp;";
-           }
-      if($depth == 2)
-           {
-               $indent_sub = "&ndash;&ndash;&nbsp;";
-           }
-
-    $classes = empty( $item->classes ) ? array() : (array) $item->classes;
-    $selected = in_array('current-menu-item',$classes) ? 'selected="selected"' : '';
-    $output .= '<option '.$selected.' value="'.$item->url.'">';
-    $output .= $indent_sub;
-    $output .= $item->title;
-  }
-  function end_el( &$output, $item, $depth = 0, $args = array() ) {
-    $output .= "</option>";
-  }
-}

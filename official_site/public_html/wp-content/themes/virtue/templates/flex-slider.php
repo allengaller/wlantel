@@ -4,23 +4,30 @@
                           ?>
                 <div class="flexslider" style="max-width:<?php echo $slidewidth;?>px;">
                 <ul class="slides">
-                  <?php $args = array(
-                      'order'          => 'ASC',
-                      'post_type'      => 'attachment',
-                      'post_parent'    => $post->ID,
-                      'post_mime_type' => 'image',
-                      'post_status'    => null,
-                      'orderby'    => 'menu_order',
-                      'numberposts'    => -1,);
-                    $attachments = get_posts($args);
-                if ($attachments) {
-                foreach ($attachments as $attachment) {
-                  $attachment_url = wp_get_attachment_url($attachment->ID , 'full');
-                  $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
-                  if(empty($image)) { $image = $attachment_url; }
-                  echo '<li><img src="'.$image.'"/></li>';
-                } 
-              } ?>                            
+                  <?php global $post;
+                      $image_gallery = get_post_meta( $post->ID, '_kad_image_gallery', true );
+                          if(!empty($image_gallery)) {
+                            $attachments = array_filter( explode( ',', $image_gallery ) );
+                              if ($attachments) {
+                              foreach ($attachments as $attachment) {
+                                $attachment_url = wp_get_attachment_url($attachment , 'full');
+                                $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
+                                  if(empty($image)) {$image = $attachment_url;}
+                                echo '<li><img src="'.$image.'"/></li>';
+                              }
+                            }
+                          } else {
+                            $attach_args = array('order'=> 'ASC','post_type'=> 'attachment','post_parent'=> $post->ID,'post_mime_type' => 'image','post_status'=> null,'orderby'=> 'menu_order','numberposts'=> -1);
+                            $attachments = get_posts($attach_args);
+                              if ($attachments) {
+                                foreach ($attachments as $attachment) {
+                                  $attachment_url = wp_get_attachment_url($attachment->ID , 'full');
+                                  $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
+                                    if(empty($image)) {$image = $attachment_url;}
+                                  echo '<li><img src="'.$image.'"/></li>';
+                                }
+                              } 
+                          } ?>                  
             </ul>
           </div> <!--Flex Slides-->
           <script type="text/javascript">

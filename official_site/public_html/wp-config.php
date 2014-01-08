@@ -1,4 +1,19 @@
 <?php
+/**
+ * WordPress基础配置文件。
+ *
+ * 本文件包含以下配置选项：MySQL设置、数据库表名前缀、密钥、
+ * WordPress语言设定以及ABSPATH。如需更多信息，请访问
+ * {@link http://codex.wordpress.org/zh-cn:%E7%BC%96%E8%BE%91_wp-config.php
+ * 编辑wp-config.php}Codex页面。MySQL设置具体信息请咨询您的空间提供商。
+ *
+ * 这个文件被安装程序用于自动生成wp-config.php配置文件，
+ * 您可以手动复制这个文件，并重命名为“wp-config.php”，然后填入相关信息。
+ *
+ * @package WordPress
+ */
+
+// ** MySQL 设置 - 具体信息来自您正在使用的主机 ** //
 /** WordPress数据库的名称 */
 define('DB_NAME', 'wlantel');
 
@@ -17,23 +32,66 @@ define('DB_CHARSET', 'utf8');
 /** 数据库整理类型。如不确定请勿更改 */
 define('DB_COLLATE', '');
 
-define('AUTH_KEY',         '-53 -G0EGLB4+ w(9*R(<.G2%^w$pOQyIPqN0%]g>FHE-:n:ylkA&7Cq+GtX-BWx');
-define('SECURE_AUTH_KEY',  'TI,U2bMGl4Lr>?>Lq(x_BZ?3R?%s [sFe[l=U*@_<>>Ncspe j0=uL#tc#vd6WN.');
-define('LOGGED_IN_KEY',    'atAX%PN+7}oN!j<*e<O9ItoJv,Z#!{7B- <=lck.UA:PEG3.^,<s[)edYvM2j;r*');
-define('NONCE_KEY',        'p#H/!8J4WCbT1LWP{]BS !$QXSA#~M-I6U;[yPT:ch-3g~Ys$n I(jvoLg&M:5-/');
-define('AUTH_SALT',        '4,$HfDmyn+dD tsRd0X;8y6@G$b:@07[t>T[|.Vk)x4v8q -#p:s0[vYVvEK}R%J');
-define('SECURE_AUTH_SALT', '?fTEh+DA9Xm_GSPpb#sp5*P;lfXq-J2a|`jm-6<#oYf3MiWD-sjAo9-&|:rL;U)-');
-define('LOGGED_IN_SALT',   'caqJ7SUh6LihU;_6,.|hE90m#Qe5&]bBkwZ~mvz$ZP*6n%jPq&AZc3 &@<SCWW?+');
-define('NONCE_SALT',       '`*6jm*XXMKy^<t,g+fpckSA[jDG3#?L!!.:|-B4Td+|]78K_M9k z76#c@(_,hIB');
+/**#@+
+ * 身份认证密钥与盐。
+ *
+ * 修改为任意独一无二的字串！
+ * 或者直接访问{@link https://api.wordpress.org/secret-key/1.1/salt/
+ * WordPress.org密钥生成服务}
+ * 任何修改都会导致所有cookies失效，所有用户将必须重新登录。
+ *
+ * @since 2.6.0
+ */
+define('AUTH_KEY',         '4jqaqV.#h8Y54yk@JRC+e>HNtn|%)y~; |Zk6g1fkEt7K[+W^^WT~5R7FoT-esfK');
+define('SECURE_AUTH_KEY',  'z+)td,coG-T:Ew)^UA9`n}D!--Mvl)jF8-b^)M%pqGXG].s>q2uh~2D0aH.I_hh2');
+define('LOGGED_IN_KEY',    'w95;r](~a7z$p-XCgPBFRBpgpOc=vx0`n+,|[d^-_fCz>sHoz=9Ceu(z)e(q{T~x');
+define('NONCE_KEY',        '*esXYC|&xD;(dh~JGwV_s&O^f9<(8xxR#Z./?6~zW8V(IkD&hU~Do_c,gmP0s,/T');
+define('AUTH_SALT',        'r7/vE++D8bv&tZ5Z*1ty;5RIE1DAxanKrOZ99l}m]$t|hmAeZvIT=QV9s!Yo]r;G');
+define('SECURE_AUTH_SALT', 'zjeEE=8ra#@9Xe%$W.LGvDaWc4i7m$JUG)3#PK](uUo[1M{u{KYFcE9^^,/v@|Z2');
+define('LOGGED_IN_SALT',   '*_*$wVj(vh+;ofnfTe2-eC!Gn3^2F.3Q2xhX!i`PTEaldJ|vPw;exh-.(kd_QdEI');
+define('NONCE_SALT',       'La<O]E5h!qAZ]PsO3FB/0YD!&aavhboWtQhhrUbEtHK9H?jPA43{01<_Pzh~?.>J');
 
+/**#@-*/
+
+/**
+ * WordPress数据表前缀。
+ *
+ * 如果您有在同一数据库内安装多个WordPress的需求，请为每个WordPress设置
+ * 不同的数据表前缀。前缀名只能为数字、字母加下划线。
+ */
 $table_prefix  = 'wp_';
 
+/**
+ * WordPress语言设置，中文版本默认为中文。
+ *
+ * 本项设定能够让WordPress显示您需要的语言。
+ * wp-content/languages内应放置同名的.mo语言文件。
+ * 例如，要使用WordPress简体中文界面，请在wp-content/languages
+ * 放入zh_CN.mo，并将WPLANG设为'zh_CN'。
+ */
 define('WPLANG', 'zh_CN');
 
+/**
+ * 开发者专用：WordPress调试模式。
+ *
+ * 将这个值改为true，WordPress将显示所有用于开发的提示。
+ * 强烈建议插件开发者在开发环境中启用WP_DEBUG。
+ */
 define('WP_DEBUG', false);
 
+/**
+ * zh_CN本地化设置：启用ICP备案号显示
+ *
+ * 可在设置→常规中修改。
+ * 如需禁用，请移除或注释掉本行。
+ */
+define('WP_ZH_CN_ICP_NUM', true);
+
+/* 好了！请不要再继续编辑。请保存本文件。使用愉快！ */
+
+/** WordPress目录的绝对路径。 */
 if ( !defined('ABSPATH') )
-        define('ABSPATH', dirname(__FILE__) . '/');
+	define('ABSPATH', dirname(__FILE__) . '/');
 
+/** 设置WordPress变量和包含文件。 */
 require_once(ABSPATH . 'wp-settings.php');
-

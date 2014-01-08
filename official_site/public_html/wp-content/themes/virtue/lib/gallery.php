@@ -77,24 +77,42 @@ function kadence_gallery($attr) {
   }
  if(kadence_display_sidebar()) {  
         if ($columns == 4) {
-           $output .= '<ul class="s-fourcolumn gallery clearfix">';
+           $output .= '<ul class="s-fourcolumn gallery kad-light-gallery clearfix">';
            $imgsize = 172;
         } elseif ($columns == 2) {
-          $output .= '<ul class="s-twocolumn gallery clearfix">';
+          $output .= '<ul class="s-twocolumn gallery kad-light-gallery clearfix">';
           $imgsize = 365;
+        } elseif ($columns == 5) {
+          $output .= '<ul class="s-fivecolumn gallery kad-light-gallery clearfix">';
+          $imgsize = 134;
+        } elseif ($columns == 6) {
+          $output .= '<ul class="s-sixcolumn gallery kad-light-gallery clearfix">';
+          $imgsize = 120;
+        } elseif ($columns == 7) {
+          $output .= '<ul class="s-sevencolumn gallery kad-light-gallery clearfix">';
+          $imgsize = 120;
         } else {
-          $output .= '<ul class="s-threecolumn gallery clearfix">';
+          $output .= '<ul class="s-threecolumn gallery kad-light-gallery clearfix">';
           $imgsize = 236;
         }
   } else {
         if ($columns == 4) {
-           $output .= '<ul class="fourcolumn gallery clearfix">';
+           $output .= '<ul class="fourcolumn gallery kad-light-gallery clearfix">';
            $imgsize = 270;
-        } elseif ($columns == 2) {
-          $output .= '<ul class="twocolumn gallery clearfix">';
+        } elseif ($columns == 5) {
+          $output .= '<ul class="fivecolumn gallery kad-light-gallery clearfix">';
+          $imgsize = 214;
+        } elseif ($columns == 6) {
+          $output .= '<ul class="sixcolumn gallery kad-light-gallery clearfix">';
+          $imgsize = 175;
+        } elseif ($columns == 7) {
+          $output .= '<ul class="sevencolumn gallery kad-light-gallery clearfix">';
+          $imgsize = 147;
+        }  elseif ($columns == 2) {
+          $output .= '<ul class="twocolumn gallery kad-light-gallery clearfix">';
           $imgsize = 556;
         } else {
-          $output .= '<ul class="threecolumn gallery clearfix">';
+          $output .= '<ul class="threecolumn gallery kad-light-gallery clearfix">';
           $imgsize = 370;
         }
   }
@@ -117,5 +135,8 @@ function kadence_gallery($attr) {
 
   return $output;
 }
+  global $virtue;
+if(isset($virtue['virtue_gallery']) && $virtue['virtue_gallery'] == '1')  {
   remove_shortcode('gallery');
   add_shortcode('gallery', 'kadence_gallery');
+} 

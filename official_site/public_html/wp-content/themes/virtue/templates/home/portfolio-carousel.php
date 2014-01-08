@@ -1,12 +1,22 @@
 
-<div class="featclass home-portfolio home-margin carousel_outerrim home-padding">
-<div class="container">
-		<?php global $smof_data; if(isset($smof_data['portfolio_title'])) {$porttitle = $smof_data['portfolio_title'];} else { $porttitle = __('Featured Projects', 'virtue'); } ?>
+<div class="home-portfolio home-margin carousel_outerrim home-padding">
+		<?php global $virtue; if(isset($virtue['portfolio_title'])) {$porttitle = $virtue['portfolio_title'];} else { $porttitle = __('Featured Projects', 'virtue'); }
+		if(!empty($virtue['home_portfolio_carousel_count'])) {$hp_pcount = $virtue['home_portfolio_carousel_count'];} else {$hp_pcount = '6';} 
+		if(!empty($virtue_premium['home_portfolio_order'])) {$hp_orderby = $virtue_premium['home_portfolio_order'];} else {$hp_orderby = 'menu_order';}
+		if($hp_orderby == 'menu_order') {$p_order = 'ASC';} else {$p_order = 'DESC';} ?>
 		<div class="clearfix"><h3 class="hometitle"><?php echo $porttitle; ?></h3></div>
-		<?php  if(isset($smof_data['portfolio_type'])) { $portfolio_category = $smof_data['portfolio_type'];} else {$portfolio_category = '';}
-				if(isset($smof_data['porfolio_show_type'])) {$portfolio_item_types = $smof_data['porfolio_show_type'];} else {$portfolio_item_types = '';}
-					if($portfolio_category == "All") {$portfolio_category = '';}
-					   		$columnnum = 'threecolumn'; $imgwidth = 370; $imgheight = 370;
+		<?php  if(!empty($virtue['portfolio_type'])) {
+							$port_cat = get_term_by ('id',$virtue['portfolio_type'],'portfolio-type');
+							$portfolio_category = $port_cat -> slug;
+						} else {
+							$portfolio_category = '';
+						}
+				if(isset($virtue['portfolio_show_type'])) {$portfolio_item_types = $virtue['portfolio_show_type'];} else {$portfolio_item_types = '';}
+					   		if(kadence_display_sidebar()) {
+					   		 	$columnnum = 's-twocolumn'; $slidewidth = 365; $slideheight = 365;
+					   		 }else {
+					   		 	$columnnum = 'threecolumn'; $slidewidth = 370; $slideheight = 370;
+					   		 }
 					   		?>
 
 		<div class="home-margin fredcarousel">
@@ -16,11 +26,11 @@
 				  $wp_query = null; 
 				  $wp_query = new WP_Query();
 				  $wp_query->query(array(
-					'orderby' => 'menu_order',
-					'order' => 'ASC',
+					'orderby' => $hp_orderby,
+					'order' => $p_order,
 					'post_type' => 'portfolio',
 					'portfolio-type'=>$portfolio_category,
-					'posts_per_page' => '6'));
+					'posts_per_page' => $hp_pcount));
 					$count =0;
 					?>
 					<?php if ( $wp_query ) : 
@@ -33,7 +43,7 @@
 									$image_url = wp_get_attachment_image_src( 
 									get_post_thumbnail_id( $post->ID ), 'full' ); 
 									$thumbnailURL = $image_url[0]; 
-									$image = aq_resize($thumbnailURL, $imgwidth, $imgheight, true); 
+									$image = aq_resize($thumbnailURL, $slidewidth, $slideheight, true); 
 									 if(empty($image)) {$image = $thumbnailURL; } ?>
 
 									<div class="imghoverclass">
@@ -66,5 +76,4 @@
             <a id="prevport_portfolio" class="prev_carousel icon-chevron-left" href="#"></a>
 			<a id="nextport_portfolio" class="next_carousel icon-chevron-right" href="#"></a>
 </div> <!-- fred Carousel-->
-</div> <!-- Container-->
 </div> <!--featclass -->

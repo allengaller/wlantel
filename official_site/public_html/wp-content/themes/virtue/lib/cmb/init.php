@@ -245,7 +245,7 @@ class cmb_Meta_Box {
 					echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4">', '' !== $meta ? $meta : $field['std'], '</textarea>','<p class="cmb_metabox_description">', $field['desc'], '</p>';
 					break;
 				case 'textarea_code':
-					echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="5" class="cmb_textarea_code">', '' !== $meta ? $meta : $field['std'], '</textarea>','<p class="cmb_metabox_description">', $field['desc'], '</p>';
+					echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" class="cmb_textarea_code">', '' !== $meta ? $meta : $field['std'], '</textarea>','<p class="cmb_metabox_description">', $field['desc'], '</p>';
 					break;
 				case 'select':
 					if( empty( $meta ) && !empty( $field['std'] ) ) $meta = $field['std'];

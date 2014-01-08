@@ -1,8 +1,16 @@
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                       <div class="row">
-                         <?php global $post; global $post; $postsummery = get_post_meta( $post->ID, '_kad_post_summery', true );
+                         <?php global $post; $postsummery = get_post_meta( $post->ID, '_kad_post_summery', true );
                           $height = get_post_meta( $post->ID, '_kad_posthead_height', true ); if (!empty($height)) $slideheight = $height; else $slideheight = 400; 
-                          $swidth = get_post_meta( $post->ID, '_kad_posthead_width', true ); if (!empty($swidth)) $slidewidth = $swidth; else $slidewidth = 770; 
+                          $swidth = get_post_meta( $post->ID, '_kad_posthead_width', true ); if (!empty($swidth)) $slidewidth = $swidth; else $slidewidth = 770;
+                          if(empty($postsummery) || $postsummery == 'default') {
+                            global $virtue;
+                            if(!empty($virtue['post_summery_default'])) {
+                            $postsummery = $virtue['post_summery_default'];
+                            } else {
+                              $postsummery = 'img_portrait';
+                            }
+                          } 
                         if($postsummery == 'img_landscape') { 
                             $textsize = 'span8'; 
                             if (has_post_thumbnail( $post->ID ) ) {
@@ -149,12 +157,12 @@
                               <a href="<?php the_permalink() ?>"><h2 class="entry-title"><?php the_title(); ?></h2></a>
                                 <div class="subhead color_gray">
                                   <span class="postauthortop">
-                                    <i class="icon-user"></i> by <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author"><?php echo get_the_author() ?></a>
+                                    <i class="icon-user"></i> <?php echo __('by', 'virtue');?> <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author"><?php echo get_the_author() ?></a> |
                                   </span>
-                                  <?php $post_category = get_the_category($post->ID); if ( $post_category==true ) { ?> | <span class="postedintop"><i class="icon-drawer"></i> <?php _e('posted in:', 'virtue');?> <?php the_category(', ') ?></span> <?php }?>
+                                  <?php $post_category = get_the_category($post->ID); if ( $post_category==true ) { ?>  <span class="postedintop"><i class="icon-folder-open"></i> <?php _e('posted in:', 'virtue');?> <?php the_category(', ') ?></span> <?php }?>
                                   | 
                                   <span class="postcommentscount">
-                                      <i class="icon-bubbles"></i> <?php comments_number( '0', '1', '%' ); ?>
+                                      <i class="icon-comments-alt"></i> <?php comments_number( '0', '1', '%' ); ?>
                                   </span>
                                 </div>   
                           </header>

@@ -12,7 +12,7 @@ Template Name: Contact
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.validate.js"></script>
 	<?php global $post; $map = get_post_meta( $post->ID, '_kad_contact_map', true ); 
 	if ($map == 'yes') { ?>
-		    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 		    <?php global $post; $address = get_post_meta( $post->ID, '_kad_contact_address', true ); 
 							    $maptype = get_post_meta( $post->ID, '_kad_contact_maptype', true ); 
 							    $height = get_post_meta( $post->ID, '_kad_contact_mapheight', true ); 
@@ -22,23 +22,63 @@ Template Name: Contact
 		    ?>
 		    <script type="text/javascript">
 					jQuery(window).load(function() {
-					 jQuery('#map_address').gMap({
-						address: "<?php echo $address;?>",
-						zoom: <?php echo $zoom;?>,
-						maptype: '<?php echo $maptype;?>',
-						markers:[
-							{
-								address: "<?php echo $address;?>",
-								html: "_address",
-								popup: false
-							}
-						]
-					});
-					});
+		
+					jQuery('#map_address').gmap3({
+			map: {
+			    address:"<?php echo $address;?>",
+				options: {
+              		zoom:<?php echo $zoom;?>,
+					draggable: true,
+					mapTypeControl: true,
+					mapTypeId: google.maps.MapTypeId.<?php echo $maptype;?>,
+					scrollwheel: false,
+					panControl: true,
+					rotateControl: false,
+					scaleControl: true,
+					streetViewControl: true,
+					zoomControl: true
+				}
+			},
+			marker:{
+            values:[
+            		 {address: "<?php echo $address;?>",
+			 	    data:"<div class='mapinfo'>'<?php echo $address;?>'</div>",
+			 	},
+            ],
+            options:{
+              draggable: false,
+            },
+			events:{
+              click: function(marker, event, context){
+                var map = jQuery(this).gmap3("get"),
+                  infowindow = jQuery(this).gmap3({get:{name:"infowindow"}});
+                if (infowindow){
+                  infowindow.open(map, marker);
+                  infowindow.setContent(context.data);
+                } else {
+                  jQuery(this).gmap3({
+                    infowindow:{
+                      anchor:marker, 
+                      options:{content: context.data}
+                    }
+                  });
+                }
+              },
+              closeclick: function(){
+                var infowindow = jQuery(this).gmap3({get:{name:"infowindow"}});
+                if (infowindow){
+                  infowindow.close();
+                }
+			  }
+			}
+          }
+        });
+        
+      });
 			</script>
 		    <?php echo '<style type="text/css" media="screen">#map_address {height:'.$mapheight.'px; margin-bottom:20px;}</style>'; ?>
     <?php } ?>
-<?php global $smof_data;
+<?php global $virtue;
 	if(isset($_POST['submitted'])) {
 	if(trim($_POST['contactName']) === '') {
 		$nameError = __('Please enter your name.', 'virtue');
@@ -69,13 +109,15 @@ Template Name: Contact
 	}
 
 	if(!isset($hasError)) {
-		$emailTo = get_option('tz_email');
-		if (!isset($emailTo) || ($emailTo == '') ){
-			$emailTo = $smof_data['contact_email'];
+		if (isset($virtue['contact_email'])) {
+			$emailTo = $virtue['contact_email'];
+		} else {
+			$emailTo = get_option('admin_email');
 		}
-		$subject = '[Website Contact] From '.$name;
-		$body = "Name: $name \n\nEmail: $email \n\nComments: $comments";
-		$headers = 'From: '.$name.' <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
+		$sitename = get_bloginfo('name');
+		$subject = '['.$sitename . __(" Contact", "virtue").']'. __("From", "virtue"). $name;
+		$body = __('Name', 'virtue').": $name \n\nEmail: $email \n\nComments: $comments";
+		$headers = __("From", "virtue").': '.$name.' <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
 
 		wp_mail($emailTo, $subject, $body, $headers);
 		$emailSent = true;

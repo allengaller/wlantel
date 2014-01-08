@@ -2,16 +2,16 @@
 /*-----------------------------------------------------------------------------------*/
 /* Include Theme Functions */
 /*-----------------------------------------------------------------------------------*/
-
-require_once locate_template('admin/index.php');          			// Options framework
+require_once locate_template('/themeoptions/framework.php');        // Options framework
+require_once locate_template('/themeoptions/options.php');     		// Options framework
 require_once locate_template('/lib/utils.php');           			// Utility functions
 require_once locate_template('/lib/init.php');            			// Initial theme setup and constants
 require_once locate_template('/lib/sidebar.php');         			// Sidebar class
 require_once locate_template('/lib/config.php');          			// Configuration
-require_once locate_template('/lib/activation.php');      			// Theme activation
 require_once locate_template('/lib/cleanup.php');        			// Cleanup
 require_once locate_template('/lib/nav.php');            			// Custom nav modifications
 require_once locate_template('/lib/metaboxes.php');     			// Custom metaboxes
+require_once locate_template('/lib/gallery_metabox.php');     		// Custom metaboxes
 require_once locate_template('/lib/comments.php');        			// Custom comments modifications
 require_once locate_template('/lib/shortcodes.php');      			// Shortcodes
 require_once locate_template('/lib/gallery.php');      				// Gallery Shortcode
@@ -23,3 +23,4 @@ require_once locate_template('/lib/icons/icons.php');          		// Icon functio
 require_once locate_template('/lib/authorbox.php');         		// Author box
 require_once locate_template('/lib/custom-woocommerce.php'); 		// Woocommerce functions
 require_once locate_template('/lib/virtuetoolkit-activate.php'); 	// Plugin Activation
+require_once locate_template('/lib/custom-css.php'); 			    // Fontend Custom CSS

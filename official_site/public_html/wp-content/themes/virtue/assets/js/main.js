@@ -6,7 +6,6 @@ jQuery(document).ready(function ($) {
 		$("collapse").collapse();
 		$('#authorTab a').click(function (e) {e.preventDefault(); $(this).tab('show'); });
 		$('.sc_tabs a').click(function (e) {e.preventDefault(); $(this).tab('show'); });
-		
 		$(".videofit").fitVids();
 		$('.accordion').on('show', function (e) {
          $(e.target).prev('.accordion-heading').find('.accordion-toggle').addClass('open');
@@ -17,10 +16,29 @@ jQuery(document).ready(function ($) {
 			});
 		$('#archive-orderby').customSelect();
 		$('.kad-select').customSelect();
-	//Menu
-	$("nav select").change(function() {
-		window.location = $(this).find("option:selected").val();
-	});
+
+		// Lightbox
+			$.extend(true, $.magnificPopup.defaults, {
+			tClose: '',
+			image: {
+				titleSrc: function(item) {
+					return item.el.find('img').attr('alt');
+					}
+				}
+		});
+		$("a[rel^='lightbox']").magnificPopup({type:'image'});
+		$('.kad-light-gallery').each(function(){
+			$(this).find('a[rel^="lightbox"]').magnificPopup({
+				type: 'image',
+				gallery: {
+					enabled:true
+					},
+					image: {
+						titleSrc: 'title'
+					}
+				});
+		});
+
 });
 
 
