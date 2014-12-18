@@ -1,0 +1,27 @@
+/*
+Theme Name: Rectangulum
+Description: Used to style the TinyMCE editor.
+*/
+
+html {
+	font-size: 100%;
+}
+body {
+	color: #444;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1;
+	text-rendering: optimizeLegibility;
+	vertical-align: baseline;
+}
+body#tinymce.wp-editor { 
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+}
+body#tinymce.wp-editor h1,
+body#tinymce.wp-editor h2,
+body#tinymce.wp-editor h3,
+body#tinymce.wp-editor h4,
+body#tinymce.wp-editor h5,
+body#tinymce.wp-editor h6 { font-family:Ubuntu, sans-serif; }

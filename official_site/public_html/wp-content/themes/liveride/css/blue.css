@@ -1,0 +1,29 @@
+/* Color scheme Blue
+----------------------------------------------- */
+body #headline-wrapper,
+body #footer,
+body input[type="submit"],
+body input[type="reset"],
+body #searchform .searchform-wrapper .send {
+  background-color: #426398;                       
+}
+body a,
+body .post-entry .post-entry-headline a {
+  color: #426398;       
+}
+body input[type="submit"]:hover,
+body input[type="reset"]:hover,
+body #searchform .send:hover {
+  background-color: #214988;                                                                   
+}
+body .site-title a,
+#wrapper #left-sidebar .menu-box .current-menu-item > a,
+#wrapper #left-sidebar .menu-box .current-menu-ancestor > a,
+#wrapper #left-sidebar .menu-box .current_page_item > a,
+#wrapper #left-sidebar .menu-box .current-page-ancestor > a,
+body #footer a {
+  color: #c8d4e8;                   
+}
+body .sidebar-widget a {
+  color: #4a6fab;                       
+}

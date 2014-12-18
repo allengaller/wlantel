@@ -15,6 +15,8 @@
 
 // ** MySQL 设置 - 具体信息来自您正在使用的主机 ** //
 /** WordPress数据库的名称 */
+define('WP_CACHE', true); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/var/www/wlantel/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('DB_NAME', 'wlantel');
 
 /** MySQL数据库用户名 */
@@ -42,14 +44,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         '4jqaqV.#h8Y54yk@JRC+e>HNtn|%)y~; |Zk6g1fkEt7K[+W^^WT~5R7FoT-esfK');
-define('SECURE_AUTH_KEY',  'z+)td,coG-T:Ew)^UA9`n}D!--Mvl)jF8-b^)M%pqGXG].s>q2uh~2D0aH.I_hh2');
-define('LOGGED_IN_KEY',    'w95;r](~a7z$p-XCgPBFRBpgpOc=vx0`n+,|[d^-_fCz>sHoz=9Ceu(z)e(q{T~x');
-define('NONCE_KEY',        '*esXYC|&xD;(dh~JGwV_s&O^f9<(8xxR#Z./?6~zW8V(IkD&hU~Do_c,gmP0s,/T');
-define('AUTH_SALT',        'r7/vE++D8bv&tZ5Z*1ty;5RIE1DAxanKrOZ99l}m]$t|hmAeZvIT=QV9s!Yo]r;G');
-define('SECURE_AUTH_SALT', 'zjeEE=8ra#@9Xe%$W.LGvDaWc4i7m$JUG)3#PK](uUo[1M{u{KYFcE9^^,/v@|Z2');
-define('LOGGED_IN_SALT',   '*_*$wVj(vh+;ofnfTe2-eC!Gn3^2F.3Q2xhX!i`PTEaldJ|vPw;exh-.(kd_QdEI');
-define('NONCE_SALT',       'La<O]E5h!qAZ]PsO3FB/0YD!&aavhboWtQhhrUbEtHK9H?jPA43{01<_Pzh~?.>J');
+define('AUTH_KEY',         'put your unique phrase here');
+define('SECURE_AUTH_KEY',  'put your unique phrase here');
+define('LOGGED_IN_KEY',    'put your unique phrase here');
+define('NONCE_KEY',        'put your unique phrase here');
+define('AUTH_SALT',        'put your unique phrase here');
+define('SECURE_AUTH_SALT', 'put your unique phrase here');
+define('LOGGED_IN_SALT',   'put your unique phrase here');
+define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@-*/
 
@@ -60,16 +62,6 @@ define('NONCE_SALT',       'La<O]E5h!qAZ]PsO3FB/0YD!&aavhboWtQhhrUbEtHK9H?jPA43{
  * 不同的数据表前缀。前缀名只能为数字、字母加下划线。
  */
 $table_prefix  = 'wp_';
-
-/**
- * WordPress语言设置，中文版本默认为中文。
- *
- * 本项设定能够让WordPress显示您需要的语言。
- * wp-content/languages内应放置同名的.mo语言文件。
- * 例如，要使用WordPress简体中文界面，请在wp-content/languages
- * 放入zh_CN.mo，并将WPLANG设为'zh_CN'。
- */
-define('WPLANG', 'zh_CN');
 
 /**
  * 开发者专用：WordPress调试模式。
